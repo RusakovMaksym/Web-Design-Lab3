@@ -1,0 +1,90 @@
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Скорочувач посилань</title>
+    <meta name="description"
+          content="Даний сайт дає вам змогу скоротити велике посилання для більш зручного використання.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="/all/style.css">
+
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation">
+        <a class="navbar-brand" th:href="@{/api/all/home}" role="banner">Скорочувач
+            посилань</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault"
+                aria-controls="navbarsDefault" aria-expanded="false" aria-label="Змінити навігацю">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/api/all/about}">Про сайт</a>
+                </li>
+            </ul>
+            <form th:if="user != null" class="form-inline my-2 my-lg-0" th:action="@{/api/user/personal}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Мій профіль</button>
+            </form>
+        </div>
+    </nav>
+</header>
+<main>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Ім’я</th>
+            <th scope="col">Пошта</th>
+            <th scope="col">Дата народження</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${user.getUsername()}">Василь</td>
+            <td th:text="${user.getMail()}">vasil@gmail.com</td>
+            <td th:text="${user.getBirthDate()}">01.01.2001</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Дата</th>
+            <th scope="col">Повне посилання</th>
+            <th scope="col">Скорочене</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="link : ${user.getLinks()}">
+            <td th:text="${link.getCreated()}">13.02.2022</td>
+            <td th:text="${link.getFullLink()}">https://
+                docs.google.com/document/d/11a7OcjCWY8RBjoJiY4yN5NwZk-Uq9_FIcFB2iX9ZJ_A/edit?usp=sharing
+            </td>
+            <td th:text="${link.getShortLink()}">https://cutt.ly/AtpHHPt</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer role="contentinfo" class="footer">
+    <div class="container">
+        <span class="text-muted">Виконав студент групи КВ-91 Русаков М. В.</span>
+    </div>
+</footer>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</html>
